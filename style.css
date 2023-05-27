@@ -20,14 +20,12 @@ button {
 
     --FF: "Roboto", Helvetica, Verdana, Arial, sans-serif;
     --FS: clamp(1rem, 2.2vh, 1.5rem);
-    --FS-NAVBAR: clamp(1.2rem, 2.4vh, 1.7rem);
+    
 
     --FS-LOGO-NAME-LG: clamp(1.8rem, 3vh, 2.3rem);
     --FS-LOGO-LG: clamp(2.6rem, 3.8vh, 3.1rem);
 
-    --FS-HEADER-NAME-SM: clamp(1.2rem, 2.4vh, 1.7rem);
-    --FS-HEADER-NAME-LG: clamp(1.5rem, 2.7vh, 2rem);
-
+    --FS-TOGGLE: .75rem;
 /* COLORS */
 
     --MAIN-BGCOLOR: #7a77b9;
@@ -92,7 +90,7 @@ html {
 
 /* || MAIN */   
 
-.book {
+.books {
     background-color: paleturquoise;
 
 }
@@ -225,12 +223,12 @@ html {
 /* adding text inside toggle button */
 .toggle .labels {
     position: absolute;
-    top: 5px;
+    top: 6px;
     left: 0;
     width: 100%;
     height: 100%;
-    font-size: 12px;
-    font-family: sans-serif;
+    font-size: var(--FS-TOGGLE);
+    font-family: inherit;
     transition: all 0.4s ease-in-out;
 }
 
