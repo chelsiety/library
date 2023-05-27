@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <meta name="author" content="Chelsie Ty" />
+        <meta name="description" content="Library Object Constructors Project" />
+
+        <title>Library</title>
+
+        <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        />
+
+        <link rel="stylesheet" href="//use.fontawesome.com/releases/v6.4.0/css/all.css">
+
+        <link rel="stylesheet" href="style.css" />
+        <script src="app.js"></script>
+    </head>
+    
+    <body>
+        <div class="page-container">
+            <header class="header">
+                <h1 class="header__logo-name">ReadStash</h1>
+            </header>   
+        
+        <main class="book">
+            <div class="book__button">
+                <button class="button">
+                    <span class="material-symbols-rounded button__icon">
+                        add_box
+                    </span>New book
+                </button>
+            </div>
+            <div class="book__cards-group">
+                <div class="book__card">
+                    <span class="material-symbols-rounded delete-icon">
+                        close
+                    </span>
+                    <h3 class="book__title">The Lightning Thief</h3>
+                    <span class="book__author">
+                        <span class="book__detail">Author:</span>
+                        Rick Riordan
+                    </span>
+                    <span class="book__page-count">
+                        <span class="book__detail">Length:</span>
+                        377 pages
+                    </span>
+                    <span class="book__published-date">
+                        <span class="book__detail">Published:</span>
+                        June 28 2005
+                    </span>
+                    <div class="book__status-toggle">
+                        <span class="book__status">Status:</span>
+                        <label for="book__read-status" class="toggle">
+                            <input type="checkbox" name="book__read-status" id="book__read-status">
+                            <span class="slider"></span>
+                            <span class="labels" data-on="Read" data-off="Unread"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p>Copyright ©
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>
+            chelsiety
+            </p>
+            <a href="https://github.com/chelsiety" target="_blank">
+                <span class="fa-brands fa-github fa-l" style="color: #7a77b9;"></span>
+            </a>
+        </footer>
+    </body>
+</html>
+
