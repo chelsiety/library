@@ -45,11 +45,11 @@
                         <span class="book__detail">Author:</span>
                         Rick Riordan
                     </span>
-                    <span class="book__page-count">
-                        <span class="book__detail">Length:</span>
-                        377 pages
+                    <span class="book__pages">
+                        <span class="book__detail">Pages:</span>
+                        377
                     </span>
-                    <span class="book__published-date">
+                    <span class="book__published">
                         <span class="book__detail">Published:</span>
                         June 28 2005
                     </span>
@@ -64,6 +64,37 @@
                 </div>
             </div>
         </main>
+        <section class="modal" id="modal">
+            <div class="modal__card">
+                <span class="material-symbols-rounded delete-icon close-modal">
+                    close
+                </span>
+                <h2 class="modal__card-title">Add new book</h2>
+                <form action="#" method="GET" id="newBookForm" class="modal__newBookForm">
+                    <div class="form-input-container">
+                        <label for="title">Title:</label>
+                        <input type="text" name="title" id="title">
+                    </div>
+                    <div class="form-input-container">
+                        <label for="author">Author:</label>
+                        <input type="text" name="author" id="author">
+                    </div>
+                    <div class="form-input-container">
+                        <label for="pages">Pages:</label>
+                        <input type="number" name="pages" id="pages">
+                    </div>
+                    <div class="form-input-container">
+                        <label for="dataPublished">Published:</label>
+                        <input type="date" name="dataPublished" id="datePublished">
+                    </div>
+                    <div class="form-input-container modal__readStatus">
+                        <label for="readStatus">Mark as read:</label>
+                        <input type="checkbox" name="readStatus" id="readStatus">
+                    </div>
+                    <input type="submit" class="button modal__button" value="Add to library">
+                </form>
+            </div>
+        </section>
         
         <footer class="footer">
             <p>Copyright ©

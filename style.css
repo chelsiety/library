@@ -154,8 +154,8 @@ html {
 }
 
 .book__author, 
-.book__page-count, 
-.book__published-date {
+.book__pages, 
+.book__published {
     line-height: 1.5;
 }
 
@@ -258,6 +258,42 @@ html {
     opacity: 1;
 }
 
+/* MODAL FORM - add new book */
+.modal__card-title {
+    margin-bottom: .5rem;
+}
+
+.modal__card {
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--CARDS-BOX-SHADOW);
+    display: flex;
+    flex-direction: column;
+    max-width: max-content;
+    min-height: 250px;
+
+    background-color:lightpink;
+    font-family: inherit;
+}
+
+.modal__newBookForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-input-container{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.modal__readStatus{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
 /* FOOTER */
 
 .footer {
@@ -269,6 +305,6 @@ html {
     align-items: center;
     gap: 0.5rem;
 
-    background-color:papayawhip;
+    /* background-color:papayawhip; */
 }
 
