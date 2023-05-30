@@ -8,7 +8,7 @@ function Book(title, author, pages, published, readStatus) {
 	this.published = published;
 	this.readStatus = readStatus;
 }
-// Display the books in myLibrary array on HTML
+// Display the books from the myLibrary array on HTML
 function renderBooks() {
 	const libraryEl = document.querySelector(".library");
 	libraryEl.innerHTML = ""; // Reset innerHTML content to empty string
