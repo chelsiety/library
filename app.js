@@ -8,6 +8,35 @@ function Book(title, author, pages, published, readStatus) {
 	this.published = published;
 	this.readStatus = readStatus;
 }
+// Display the books in myLibrary array on HTML
+function renderBooks() {
+	const libraryEl = document.querySelector(".library");
+	libraryEl.innerHTML = ""; // Reset innerHTML content to empty string
+	libraryEl.setAttribute("class", "library book__cards-group"); // Add class styling to libraryEl div
+	myLibrary.forEach((book) => {
+		let bookEl = document.createElement("div");
+		bookEl.setAttribute("class", "book__card");
+		bookEl.innerHTML = `
+			<span class="material-symbols-rounded delete-icon">
+				close
+			</span>
+			<h3 class="book__title">${book.title}</h3>
+			<span class="book__author">
+				<span class="book__detail">Author:</span>
+				${book.author}
+			</span>
+			<span class="book__pages">
+				<span class="book__detail">Pages:</span>
+				${book.pages}
+			</span>
+			<span class="book__published">
+				<span class="book__detail">Published:</span>
+			${book.published}
+			</span>
+			`;
+		libraryEl.appendChild(bookEl); // Append bookEL to libraryEl
+	});
+}
 
 // Create a new instance of an object from the constructor function, Book
 function addBookToLibrary() {
@@ -23,6 +52,7 @@ function addBookToLibrary() {
 	// Add newly created object (book) to the library array
 	myLibrary.push(newBook);
 	console.log(myLibrary);
+	renderBooks();
 }
 
 // Call the function, "addBookToLibrary" when the new book form is submitted
