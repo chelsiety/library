@@ -8,34 +8,46 @@ function Book(title, author, pages, published, readStatus) {
 	this.published = published;
 	this.readStatus = readStatus;
 }
+
 // Display the books from the myLibrary array on HTML
 function renderBooks() {
 	const libraryEl = document.querySelector(".library");
 	libraryEl.innerHTML = ""; // Reset innerHTML content to empty string
 	libraryEl.setAttribute("class", "library book__cards-group"); // Add class styling to libraryEl div
-	myLibrary.forEach((book) => {
-		let bookEl = document.createElement("div");
+	for (let i = 0; i < myLibrary.length; i++) {
+		let book = myLibrary[i]; // Retrieve a book element from the library array and assign it to variable, book
+		let bookEl = document.createElement("div"); // Create book card element
 		bookEl.setAttribute("class", "book__card");
+
+		// Use onclick="removeBook(${i}) as index position labeling of books in library array"
 		bookEl.innerHTML = `
-			<span class="material-symbols-rounded delete-icon">
-				close
-			</span>
-			<h3 class="book__title">${book.title}</h3>
-			<span class="book__author">
-				<span class="book__detail">Author:</span>
-				${book.author}
-			</span>
-			<span class="book__pages">
-				<span class="book__detail">Pages:</span>
-				${book.pages}
-			</span>
-			<span class="book__published">
-				<span class="book__detail">Published:</span>
-			${book.published}
-			</span>
-			`;
+			<div class="delete-btn delete-icon" onclick="removeBook(${i})"> 
+				<span class="material-symbols-rounded delete-icon">
+					close
+				</span>
+			</div>
+				<h3 class="book__title">${book.title}</h3>
+				<span class="book__author">
+					<span class="book__detail">Author:</span>
+					${book.author}
+				</span>
+				<span class="book__pages">
+					<span class="book__detail">Pages:</span>
+					${book.pages}
+				</span>
+				<span class="book__published">
+					<span class="book__detail">Published:</span>
+				${book.published}
+				</span>
+				`;
 		libraryEl.appendChild(bookEl); // Append bookEL to libraryEl
-	});
+	}
+}
+
+// Remove book from library (remove book element at specified index from array and re-render library in HTML)
+function removeBook(index) {
+	myLibrary.splice(index, 1);
+	renderBooks();
 }
 
 // Create a new instance of an object from the constructor function, Book
