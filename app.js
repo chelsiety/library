@@ -9,6 +9,24 @@ function Book(title, author, pages, published, readStatus) {
 	this.readStatus = readStatus;
 }
 
+Book.prototype.toggleRead = () => {
+	this.readStatus = !this.readStatus; // switch: read to unread and vice versa
+	console.log(this.readStatus);
+};
+
+function toggleRead(index) {
+	myLibrary[index].toggleRead();
+
+	const readToggleBtn = document.querySelector(".book__status-toggle-btn");
+	if (this.readStatus === false) {
+		readToggleBtn.textContent = "Not Read";
+		readToggleBtn.style.backgroundColor = "#4d4d4d";
+	} else {
+		readToggleBtn.textContent = "Read";
+		readToggleBtn.style.backgroundColor = "var(--MAIN-BGCOLOR)";
+	}
+}
+
 // Display the books from the myLibrary array on HTML
 function renderBooks() {
 	const libraryEl = document.querySelector(".library");
@@ -39,6 +57,12 @@ function renderBooks() {
 					<span class="book__detail">Published:</span>
 				${book.published}
 				</span>
+				<div class="book__status-toggle>
+                        <span class="book__status">Status:</span>
+						<button class="button book__status-toggle-btn" onclick="toggleRead(${i})"> 
+							${book.readStatus ? "Read" : "Not read"}
+						</button>
+                </div> 
 				`;
 		libraryEl.appendChild(bookEl); // Append bookEL to libraryEl
 	}

@@ -167,6 +167,21 @@ html {
     gap: 5px;
 }
 
+
+
+.book__status-read {
+    background-color: var(--MAIN-BGCOLOR);
+}
+
+.book__status-not-read {
+    background-color: var(--FONT-COLOR-DARK-GRAY);
+}
+
+.book__status-not-read:hover{
+    background-color: rgb(104, 114, 123)
+}
+
+
 /* styling the toggle */
 .toggle {
     --width: 75px;
