@@ -1,12 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap");
 
-/* || RESET */
-
-* {
-    margin: 0;
-    padding: 0;
+/* || CSS RESET */
+*,
+*::before,
+*::after {
     box-sizing: border-box;
-}
+    padding: 0;
+    margin: 0;
+    }
 
 input,
 button {
@@ -14,334 +15,245 @@ button {
 }
 
 /* || VARIABLES */
-
 :root {
-/* FONTS */
-
-    --FF: "Roboto", Helvetica, Verdana, Arial, sans-serif;
-    --FS: clamp(1rem, 2.2vh, 1.5rem);
-    
-
-    --FS-LOGO-NAME-LG: clamp(1.8rem, 3vh, 2.3rem);
-    --FS-LOGO-LG: clamp(2.6rem, 3.8vh, 3.1rem);
-
-    --FS-TOGGLE: .75rem;
-/* COLORS */
-
-    --MAIN-BGCOLOR: #7a77b9;
-    --BODY-BGCOLOR: hsl(0, 0%, 96%);
-    --ACCENT-COLOR: #ea7186;
-    --HEADER-BGCOLOR: #ffffff;
-    --CARD-BGCOLOR: #ffffff;
-    --FONT-COLOR-DARK: #000000;
-    --FONT-COLOR-DARK-GRAY: hsl(27, 5%, 45%);
-    --FONT-COLOR-LIGHT: #ffffff;
-    --LINE-DIVIDER-COLOR: #e7e5e4;
-    --LINK-COLOR: #ffffff;
-    --HOVER-COLOR: #7471a3;
-    --LINK-ACTIVE: #bd9dea;
-    --MAX-LINES: 3;
-
-/* BOX SHADOW */
-    --HEADER-BOX-SHADOW: 0px 4px 7px 2px rgba(0, 0, 0, 0.07);
-    --CARDS-BOX-SHADOW: 0 3px 8px rgba(0, 0, 0, 0.09);
+    --white: #fffbfb;
+    --gray: #f0eef1;
+    --black: #050505;
+    --red: #ff7070;
+    --light-violet: #7a77b9;
+    --dark-violet: #504f75;
+    --light-red: #ff9c9c;
+    --border-radius: 8px;
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 15px;
+    --spacing-lg: 20px;
+    --spacing-xl: 40px;
+    --container-width: 1200px;
+    --shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
-
-/* || GENERAL STYLES */
-
-html {
-    font-size: var(--FS);
-    font-family: var(--FF);
-    background-color: var(--BODY-BGCOLOR);
-}
-
-/* .projects__label,
-.announcements__label,
-.trending__label {
-    margin-bottom: 15px;
-} */
 
 /* ICON */
-
 .material-symbols-rounded {
     font-variation-settings: "FILL" 1;
     vertical-align: middle;
 }
 
-/* || BLOCKS */ /* aka components */
-
-/* .page-container {
-    display: grid;
-    grid-template-columns: 350px 2fr 1fr;
-    background-color: var(--BODY-BGCOLOR);
-
-} */
-
-
-/* || HEADER */  /* header block */  
-.header {
-  /* background-color:var(--HEADER-BGCOLOR); */
-    background-color: lightblue;
-    padding: 1.5rem 3rem;
-    margin-bottom: 1rem;
-    box-shadow: var(--HEADER-BOX-SHADOW);
+html {
+    /* footer support */
+    position: relative;
+    min-height: 100%;
 }
 
-
-/* || MAIN */   
-
-.books {
-    background-color: paleturquoise;
-
+body {
+    background-color: var(--gray);
+    color: var(--black);
+    font-family:  "Roboto", Helvetica, Verdana, Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    word-wrap: break-word;
+    /* footer support */
+    margin-bottom: 100px;
 }
 
-.book__button {
-    margin-bottom: 1rem;
-    padding-left: 3rem;
-    
-    background-color: palegoldenrod;
-}
-
-.button {
-    appearance: none;
-    border: 0;
-    border-radius: 5px;
-    background: var(--MAIN-BGCOLOR);
-    color: var(--FONT-COLOR-LIGHT);
-    padding: 0.625em 1em;
-    min-width: 6.25em;
+button,
+input {
+    border: none;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
     cursor: pointer;
+    outline: none;
 }
 
-.button:hover {
-    background-color: var(--HOVER-COLOR);
+input[type='text'],
+    input[type='number'] {
+    cursor: text;
+    }
+
+.container {
+    max-width: var(--container-width);
+    padding: var(--spacing-lg);
+    margin: 0 auto;
+}
+
+.btn {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius);
+    transition: filter 0.15s ease-in-out;
+}
+
+.btn:hover {
+    filter: brightness(90%);
+}
+
+.btn-add {
+    font-size: 24px;
+    font-weight: 600;
+    background-color: var(--dark-violet);
+    color: var(--white);
+}
+
+.btn-add:hover{
+    filter: brightness(120%);
+}
+
+.btn-light-violet {
+    background-color: var(--light-violet);
+    color: var(--white);
+}
+
+.btn-light-red {
+    background-color: var(--light-red);
+}
+
+/* HEADER */
+.header {
+    background-color: var(--white);
+    box-shadow: var(--shadow);
+}
+
+.header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+/* MAIN */
+.main {
+    margin-top: var(--spacing-lg);
+    text-align: center;
+}
+
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+}
+
+.book-text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+    line-height: 2;
+}
+
+.book-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 20px;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    background-color: var(--white);
+    box-shadow: var(--shadow);
+    line-height: 1.2;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.title {
+    font-weight: 600;
+}
+
+/* || MODAL FORM - add new book */
+.modal {
+    position: fixed;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: var(--gray);
+    text-align: center;
+    transform: translate(-50%, -50%) scale(0); /*scale(0) hides the modal*/
+    transition: 0.2s ease-in-out;
+}
+
+.modal.active {
+    transform: translate(-50%, -50%) scale(1); /*scale(1) displays the modal*/
+}
+
+.add-book-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.add-book-form button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .button__icon {
-    margin-right: 0.3rem;
+    margin-right: 0.5rem;
 }
 
-.book__cards-group {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 25px;
-    padding: 0rem 3rem;
+.input {
+    width: 100%;
+    padding: 10px;
+    border-radius: var(--border-radius);
 }
-.book__card {
-    /* background-color: var(--CARD-BGCOLOR); */
-    
-    padding: 1rem 1.5rem;
-    border-radius: 0.5rem;
-    box-shadow: var(--CARDS-BOX-SHADOW);
+
+.is-read {
     display: flex;
-    flex-direction: column;
-
-    min-height: 250px;
-
-    background-color:lavender;
-}  
-
-.delete-icon {
-    display: flex;
-    align-self: flex-end;
-    cursor: pointer;
-    margin-bottom: 0.5em;
+    gap: var(--spacing-md);
 }
 
-.book__title {
-    line-height: 1.2;
-    margin-bottom: 1em;
+.checkbox {
+    width: 20px;
+    height: 20px;
+    margin-top: 4px;
+    accent-color: white;
 }
 
-.book__author, 
-.book__pages, 
-.book__published {
-    line-height: 1.5;
-}
-
-.book__status-toggle {
-    margin-top: 1em;
-    margin-bottom: 1em;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-
-
-.book__status-read {
-    background-color: var(--MAIN-BGCOLOR);
-}
-
-.book__status-not-read {
-    background-color: var(--FONT-COLOR-DARK-GRAY);
-}
-
-.book__status-not-read:hover{
-    background-color: rgb(104, 114, 123)
-}
-
-
-/* styling the toggle */
-.toggle {
-    --width: 75px;
-    --height: calc(var(--width)/3);
-
-    position: relative;
-    display: inline-block;
-    width: var(--width);
-    height: var(--height);
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
-    border-radius: var(--height);
-    cursor: pointer; 
-}
-
-/* hiding the checkbox */
-.toggle input {
-    display: none;
-}
-
-/* creating slider */
-.toggle .slider {
-    position: absolute;
+.overlay {
+    position: fixed;
     top: 0;
     left: 0;
+    display: none; /*hides overlay*/
     width: 100%;
     height: 100%;
-    border-radius: var(--height);
-    background-color: #ccc;
-    transition: all 0.4s ease-in-out;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
-.toggle .slider::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: calc(var(--height));
-    height: calc(var(--height));
-    border-radius: calc(var(--height)/2);
-    background-color: #fff;
-    box-shadow: 0px 1px 3px rgba(0, 0 , 0, 0.3);
-    transition: all 0.4s ease-in-out;
+.overlay.active {
+    display: block; /*displays overlay when modal appears*/
 }
-
-/* adding slider effect to the toggle button */
-.toggle input:checked + .slider {
-    background-color: var(--MAIN-BGCOLOR);
-}
-
-.toggle input:checked + .slider::before {
-    transform: translateX(calc(var(--width) - var(--height)));
-}
-
-/* adding text inside toggle button */
-.toggle .labels {
-    position: absolute;
-    top: 6px;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    font-size: var(--FS-TOGGLE);
-    font-family: inherit;
-    transition: all 0.4s ease-in-out;
-}
-
-.toggle .labels::after {
-    content: attr(data-off);
-    position: absolute;
-    right: 5px;
-    color: #4d4d4d;
-    opacity: 1;
-    transition: all 0.4s ease-in-out;
-}
-
-.toggle .labels::before {
-    content: attr(data-on);
-    position: absolute;
-    left: 5px;
-    color: #ffffff;
-    opacity: 0;
-    transition: all 0.4s ease-in-out;
-}
-
-.toggle input:checked~.labels::after {
-    opacity: 0;
-}
-
-.toggle input:checked~.labels::before {
-    opacity: 1;
-}
-
-/* MODAL FORM - add new book */
-
-.modal__card {
-    padding: 1rem 1.5rem;
-    border-radius: 0.5rem;
-    box-shadow: var(--CARDS-BOX-SHADOW);
-    display: flex;
-    flex-direction: column;
-    max-width: max-content;
-    min-height: 250px;
-
-    background-color:lightpink;
-    font-family: inherit;
-/* 
-    position: relative; */
-}
-
-.modal__display-topright{
-    float: right;
-
-
-    /* position: absolute;
-    top: 0;
-    right: 0; */
-
-}
-
-.modal__card-title {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
-
-.modal__newBookForm {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.form-input-container{
-    display: flex;
-    flex-direction: column;
-    
-}
-
-.modal__readStatus{
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    margin-top: 0.2rem;
-    margin-bottom: 1.5rem;
-}
-
-.modal__close-button {
-    margin-bottom: 0.5rem;
-}
-
 
 /* FOOTER */
-
 .footer {
-    position: fixed;
+    position: absolute;
     width: 100%;
-    bottom: 1rem;
+    bottom: 0;
+    left: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
+    padding: 10px;
+}
 
-    /* background-col or:papayawhip; */
+.fa-github {
+    font-size: 24px;
+    color:  #7a77b9;
+    transition: transform 0.3s ease-in-out;
+}
+
+.fa-github:hover {
+    transform: rotate(360deg) scale(1.2);
 }
 

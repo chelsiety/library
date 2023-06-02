@@ -21,81 +21,20 @@
     </head>
     
     <body>
-        <div class="page-container">
-            <header class="header">
-                <h1 class="header__logo-name">ReadStash</h1>
-            </header>   
-        
-        <main class="books">
-            <div class="book__button">
-                <button class="button book__new-book-btn">
-                    <span class="material-symbols-rounded button__icon">
-                        add_box
-                    </span>New book
-                </button>
+        <header class="header">
+            <div class="container">
+                <h1>ReadStash</h1>
             </div>
-            <div class="book__cards-group">
-                <div class="book__card">
-                    <span class="material-symbols-rounded delete-icon">
-                        close
-                    </span>
-                    <h3 class="book__title">The Lightning Thief</h3>
-                    <span class="book__author">
-                        <span class="book__detail">Author:</span>
-                        Rick Riordan
-                    </span>
-                    <span class="book__pages">
-                        <span class="book__detail">Pages:</span>
-                        377
-                    </span>
-                    <span class="book__published">
-                        <span class="book__detail">Published:</span>
-                        June 28 2005
-                    </span>
-                    <div class="book__status-toggle">
-                        <span class="book__status">Status:</span>
-                        <label for="book__read-status" class="toggle">
-                            <input type="checkbox" name="book__read-status" id="book__read-status">
-                            <span class="slider"></span>
-                            <span class="labels" data-on="Read" data-off="Unread"></span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <section class="library"></section>
-                <!--books are rendered here in the library-->
+        </header>
+        <main class="main container">
+            <button class="btn btn-add" id="addBookBtn">
+                <span class="material-symbols-rounded button__icon">
+                add_box
+                </span>New book
+            </button>
+            <!--Books are rendered here in the library grid (booksGrid)-->
+            <div class="books-grid" id="booksGrid"></div>
         </main>
-        <section class="modal" id="modal">
-            <div class="modal__card modal__card-new-book" style="display:none">
-                <span class="material-symbols-rounded delete-icon modal__delete-icon modal__display-topright">
-                    close
-                </span>
-                <h2 class="modal__card-title">Add new book</h2>
-                <form action="#" method="GET" id="newBookForm" class="modal__newBookForm">
-                    <div class="form-input-container">
-                        <label for="title">Title:</label>
-                        <input type="text" name="title" id="title">
-                    </div>
-                    <div class="form-input-container">
-                        <label for="author">Author:</label>
-                        <input type="text" name="author" id="author">
-                    </div>
-                    <div class="form-input-container">
-                        <label for="pages">Pages:</label>
-                        <input type="number" name="pages" id="pages">
-                    </div>
-                    <div class="form-input-container">
-                        <label for="published">Published:</label>
-                        <input type="date" name="published" id="published">
-                    </div>
-                    <div class="form-input-container modal__readStatus">
-                        <label for="readStatus">Mark as read:</label>
-                        <input type="checkbox" name="readStatus" id="readStatus">
-                    </div>
-                    <input type="submit" class="button modal__close-button" value="Add book to library">
-                </form>
-            </div>
-        </section>
         <footer class="footer">
             <p>Copyright ©
                 <script>
@@ -104,11 +43,44 @@
             chelsiety
             </p>
             <a href="https://github.com/chelsiety" target="_blank">
-                <span class="fa-brands fa-github fa-l" style="color: #7a77b9;"></span>
+                <span class="fa-brands fa-github fa-l"></span>
             </a>
         </footer>
-        
+        <div class="modal" id="addBookModal">
+            <form class="add-book-form" id="addBookForm">
+                <h3>Add new book</h3>
+                <input
+                    class="input"
+                    type="text"
+                    id="title"
+                    placeholder="Title"
+                    required
+                    maxlength="100"
+                />
+                <input
+                    class="input"
+                    type="text"
+                    id="author"
+                    placeholder="Author"
+                    required
+                    maxlength="100"
+                />
+                <input
+                    class="input"
+                    type="number"
+                    id="pages"
+                    placeholder="Pages"
+                    required
+                    max="10000"
+                />
+                <div class="is-read">
+                    <label for="is-read">Have you read it?</label>
+                    <input class="checkbox" type="checkbox" id="isRead"/>
+                </div>
+                <button class="btn btn-light-violet" type="submit">Add book to library</button>
+            </form>
+        </div>
+        <div class="overlay" id="overlay"></div>
         <script src="app.js"></script>
     </body>
 </html>
-

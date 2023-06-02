@@ -1,106 +1,183 @@
-let myLibrary = [];
+// Data Structures
 
-// Initializes the construction of a book (constructor function) based on info passed into this function
-function Book(title, author, pages, published, readStatus) {
-	this.title = title;
-	this.author = author;
-	this.pages = pages;
-	this.published = published;
-	this.readStatus = readStatus;
+class Book {
+	//Initializes the construction of a book based on the info passed into this constructor function
+	constructor(
+		title = "Unknown",
+		author = "Unknown",
+		pages = "0",
+		isRead = false
+	) {
+		this.title = title;
+		this.author = author;
+		this.pages = pages;
+		this.isRead = isRead;
+	}
+}
+class Library {
+	constructor() {
+		this.books = []; // Array of book objects
+	}
+
+	addBook(newBook) {
+		// Ensures no book title duplicates are added (If specified book is NOT in library, add new book to "books" array)
+		if (!this.isInLibrary(newBook)) {
+			this.books.push(newBook); // Add newly created object (book) to "books" array
+		}
+	}
+
+	removeBook(title) {
+		// Updates the "books" array filled with elements (books) that does NOT contain the selected book title.
+		this.books = this.books.filter((book) => book.title !== title);
+	}
+
+	getBook(title) {
+		// Selects the title of the book (returns the value (title) of the first element that passes a test)
+		return this.books.find((book) => book.title === title);
+	}
+
+	isInLibrary(newBook) {
+		// Search for book title duplicates (returns true or false)
+		return this.books.some((book) => book.title === newBook.title);
+	}
 }
 
-Book.prototype.toggleRead = () => {
-	this.readStatus = !this.readStatus; // switch: read to unread and vice versa
-	console.log(this.readStatus);
+// Create a new instance of an object (new object/ new library) from the constructor function, Library
+const library = new Library();
+
+// User Interface - Get DOM elements of UI
+const addBookBtn = document.getElementById("addBookBtn");
+const addBookModal = document.getElementById("addBookModal");
+const overlay = document.getElementById("overlay");
+const addBookForm = document.getElementById("addBookForm");
+const booksGrid = document.getElementById("booksGrid");
+
+// Arrow functions
+const openAddBookModal = () => {
+	addBookForm.reset(); // Clear the form fields, reset the values of all elements in a form
+	addBookModal.classList.add("active"); // Display modal when "addBookBtn" button is clicked
+	overlay.classList.add("active"); // Add transparent gray background when modal is displayed
 };
 
-function toggleRead(index) {
-	myLibrary[index].toggleRead();
+const closeAddBookModal = () => {
+	addBookModal.classList.remove("active");
+	overlay.classList.remove("active");
+};
 
-	const readToggleBtn = document.querySelector(".book__status-toggle-btn");
-	if (this.readStatus === false) {
-		readToggleBtn.textContent = "Not Read";
-		readToggleBtn.style.backgroundColor = "#4d4d4d";
+const closeAllModals = () => {
+	closeAddBookModal();
+};
+
+const handleKeyboardInput = (e) => {
+	if (e.key === "Escape") closeAllModals();
+};
+
+// Render or display updated books grid in HTML
+const updateBooksGrid = () => {
+	resetBooksGrid();
+	// Loop through the 'books' array in library class and create a book card for each book object
+	for (let book of library.books) {
+		createBookCard(book);
+	}
+};
+
+// Reset innerHTML content to empty string to prevent repetition of book cards due to "for loops"
+const resetBooksGrid = () => {
+	booksGrid.innerHTML = "";
+};
+
+// Display book in HTML by creating HTML elements
+const createBookCard = (book) => {
+	const bookCard = document.createElement("div");
+	const title = document.createElement("h3");
+	const author = document.createElement("p");
+	const pages = document.createElement("p");
+	const buttonGroup = document.createElement("div");
+	const readBtn = document.createElement("button");
+	const removeBtn = document.createElement("button");
+
+	// Add classes to HTML elements
+	bookCard.classList.add("book-card");
+	title.classList.add("title");
+	buttonGroup.classList.add("button-group");
+	readBtn.classList.add("btn");
+	removeBtn.classList.add("btn");
+
+	// Event listeners for "read" toggle button and "remove" button
+	readBtn.onclick = toggleRead;
+	removeBtn.onclick = removeBook;
+
+	// Add text content to book card's HTML elements
+	title.textContent = `"${book.title}"`;
+	author.textContent = `Author: ${book.author}`;
+	pages.textContent = `Length: ${book.pages} pages`;
+	removeBtn.textContent = "Remove";
+
+	if (book.isRead) {
+		// Add text content and class (color) if true (isRead === true)
+		readBtn.textContent = "Read";
+		readBtn.classList.add("btn-light-violet");
 	} else {
-		readToggleBtn.textContent = "Read";
-		readToggleBtn.style.backgroundColor = "var(--MAIN-BGCOLOR)";
+		readBtn.textContent = "Not read";
+		readBtn.classList.add("btn-light-red");
 	}
-}
 
-// Display the books from the myLibrary array on HTML
-function renderBooks() {
-	const libraryEl = document.querySelector(".library");
-	libraryEl.innerHTML = ""; // Reset innerHTML content to empty string
-	libraryEl.setAttribute("class", "library book__cards-group"); // Add class styling to libraryEl div
-	for (let i = 0; i < myLibrary.length; i++) {
-		let book = myLibrary[i]; // Retrieve a book element from the library array and assign it to variable, book
-		let bookEl = document.createElement("div"); // Create book card element
-		bookEl.setAttribute("class", "book__card");
+	// Append newly created title, author, pages elements to bookCard
+	bookCard.appendChild(title);
+	bookCard.appendChild(author);
+	bookCard.appendChild(pages);
+	// Append newly created buttons to buttonGroup
+	buttonGroup.appendChild(readBtn);
+	buttonGroup.appendChild(removeBtn);
+	// Append newly created buttonGroup to bookCard
+	bookCard.appendChild(buttonGroup);
+	// Append newly created bookCard to booksGrid
+	booksGrid.appendChild(bookCard);
+};
 
-		// Use onclick="removeBook(${i}) as index position labeling of books in library array"
-		bookEl.innerHTML = `
-			<div class="delete-btn delete-icon" onclick="removeBook(${i})"> 
-				<span class="material-symbols-rounded delete-icon">
-					close
-				</span>
-			</div>
-				<h3 class="book__title">${book.title}</h3>
-				<span class="book__author">
-					<span class="book__detail">Author:</span>
-					${book.author}
-				</span>
-				<span class="book__pages">
-					<span class="book__detail">Pages:</span>
-					${book.pages}
-				</span>
-				<span class="book__published">
-					<span class="book__detail">Published:</span>
-				${book.published}
-				</span>
-				<div class="book__status-toggle>
-                        <span class="book__status">Status:</span>
-						<button class="button book__status-toggle-btn" onclick="toggleRead(${i})"> 
-							${book.readStatus ? "Read" : "Not read"}
-						</button>
-                </div> 
-				`;
-		libraryEl.appendChild(bookEl); // Append bookEL to libraryEl
-	}
-}
+const getBookFromInput = () => {
+	// Grab the DOM element values from the form field (get book info)
+	const title = document.getElementById("title").value;
+	const author = document.getElementById("author").value;
+	const pages = document.getElementById("pages").value;
+	const isRead = document.getElementById("isRead").checked;
 
-// Remove book from library (remove book element at specified index from array and re-render library in HTML)
-function removeBook(index) {
-	myLibrary.splice(index, 1);
-	renderBooks();
-}
+	// Create new object (new book) based on given book info
+	return new Book(title, author, pages, isRead);
+};
 
-// Create a new instance of an object from the constructor function, Book
-function addBookToLibrary() {
-	// Grab the DOM element values from form field to get the book info
-	const title = document.querySelector("#title").value;
-	const author = document.querySelector("#author").value;
-	const pages = document.querySelector("#pages").value;
-	const published = document.querySelector("#published").value;
-	const readStatus = document.querySelector("#readStatus").checked;
-	// Create a new object (new book) based on given form field data
-	let newBook = new Book(title, author, pages, published, readStatus);
-	console.log(newBook);
-	// Add newly created object (book) to the library array
-	myLibrary.push(newBook);
-	console.log(myLibrary);
-	renderBooks();
-}
+const addBook = (e) => {
+	e.preventDefault(); // Prevent default action of 'submit input' which is sending data to a server
+	const newBook = getBookFromInput(); // Get book info/ details from the "add book form"
 
-// Call the function, "addBookToLibrary" when the new book form is submitted
-const newBookFormSubmission = document.querySelector(".modal__card-new-book");
-newBookFormSubmission.addEventListener("submit", (event) => {
-	event.preventDefault();
-	addBookToLibrary();
-});
+	library.addBook(newBook); // Call class function - update "books" array
+	updateBooksGrid(); // Render or display updated books grid in HTML
 
-// Displays the "add a new book" form when "add book" button is clicked
-const addBookBtn = document.querySelector(".book__new-book-btn");
-addBookBtn.addEventListener("click", () => {
-	const modalNewBook = document.querySelector(".modal__card-new-book");
-	modalNewBook.style.display = "block";
-});
+	closeAddBookModal();
+};
+
+const removeBook = (e) => {
+	const title =
+		e.target.parentNode.parentNode.firstChild.innerHTML.replaceAll('"', "");
+	// e.target.parentNode.parentNode.firstChild.innerHTML = clicked removeBtn's parent node, and its parent node's first child's innerHTML which the element that contains the title
+	// Returns the title name without the quotation marks
+	// replaceAll removes the quotation marks ("") and replaces the ("") with nothing (empty string)
+
+	library.removeBook(title); // Call class function - update "books" array
+	updateBooksGrid(); // Render or display updated books grid in HTML
+};
+
+const toggleRead = (e) => {
+	const title =
+		e.target.parentNode.parentNode.firstChild.innerHTML.replaceAll('"', "");
+
+	const book = library.getBook(title); // Call class function - selects the book object with the targeted title from the "books" array
+	book.isRead = !book.isRead; // Switch (true or false): toggle between 'read' and 'not read' status for targeted book object (book card)
+	updateBooksGrid(); // Render or display updated books grid in HTML - with updated toggle status class styling and textContent(isRead)
+};
+
+// Event listeners for modal
+addBookBtn.onclick = openAddBookModal;
+overlay.onclick = closeAllModals;
+addBookForm.onsubmit = addBook;
+window.onkeydown = handleKeyboardInput;
